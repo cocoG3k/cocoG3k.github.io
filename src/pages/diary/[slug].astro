@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, getEntryBySlug } from "astro:content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("diary");
+  return entries.map((entry) => ({ params: { slug: entry.slug } }));
+}
+
+const { slug } = Astro.params;
+const entry = await getEntryBySlug("diary", slug);
+
+if (!entry) {
+  throw new Error(`Diary entry not found: ${slug}`);
+}
+
+const { Content } = await entry.render();
+const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g, ".");
+---
+
+<BaseLayout title={`cocoG | ${entry.data.title}`} description={entry.data.description}>
+  <main>
+    <header>
+      <div class="brand">Coco G3k</div>
+      <nav>
+        <a href="/">ホーム</a>
+        <a href="/diary">日記一覧</a>
+      </nav>
+    </header>
+
+    <section class="hero" style="padding-bottom: 32px;">
+      <div>
+        <span class="entry-date">{formatDate(entry.data.date)}</span>
+        <h1>{entry.data.title}</h1>
+        <p>{entry.data.description}</p>
+        <div class="hero-actions">
+          <a class="button" href="/diary">一覧へ戻る</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>タグ</h3>
+        <p>{entry.data.tags?.join(" / ") ?? "まだタグはありません。"}</p>
+      </div>
+    </section>
+
+    <article class="card" style="margin-top: 24px;">
+      <Content />
+    </article>
+
+    <footer>
+      <span>© 2024 Coco G3k. Written with calm.</span>
+      <span>Tokyo / Home desk</span>
+    </footer>
+  </main>
+</BaseLayout>
