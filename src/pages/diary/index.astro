@@ -12,21 +12,23 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
 <BaseLayout title="cocoG | 日記一覧">
   <main>
     <header>
-      <div class="brand">Coco G3k</div>
+      <div class="brand">
+        <a href="/">cocoG</a>
+      </div>
       <nav>
-        <a href="/">ホーム</a>
+        <a href="/diary">日記一覧</a>
       </nav>
     </header>
 
     <section class="hero" style="padding-bottom: 32px;">
       <div>
         <span class="badge">Diary archive</span>
-        <h1>日々の記録</h1>
-        <p>小さな気配や、光の色を集めた日記の一覧です。</p>
+        <h1>最新記事</h1>
+        <p>日記とかなんとか。</p>
       </div>
       <div class="card">
         <h3>最新のひとこと</h3>
-        <p>ページをめくるように、静かな記録を辿ってください。</p>
+        <p>ページをめくるように、</p>
       </div>
     </section>
 

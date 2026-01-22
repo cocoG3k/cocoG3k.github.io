@@ -10,8 +10,8 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
 ---
 
 <BaseLayout
-  title="Coco G3k | 小さな日記"
-  description="Astroで作る、穏やかな日記の個人ページ"
+  title="cocoG"
+  description="これでどうや"
 >
   <main>
     <header>
@@ -20,10 +20,6 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
       </div>
       <nav>
         <a href="/diary">日記一覧</a>
-        <a href="/diary">最新記事</a>
-        <a href="/diary">記事の余白</a>
-        <a href="/diary">この場所</a>
-        <a href="/diary">おたより</a>
       </nav>
     </header>
 
@@ -59,20 +55,6 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
             <p>{entry.data.description}</p>
           </article>
         ))}
-      </div>
-      <div class="card-grid" style="margin-top: 24px;">
-        <article class="card">
-          <h3>最近の気づき</h3>
-          <p>午前9時の静けさと、夕方17時の光の色を今日の記事にまとめました。</p>
-        </article>
-        <article class="card">
-          <h3>今日の音</h3>
-          <p>柔らかなピアノと、湯気のように薄いアンビエントを最新記事で紹介。</p>
-        </article>
-        <article class="card">
-          <h3>手帳の一言</h3>
-          <p>「ゆっくりでも、少しずつ」。最新記事に小さなメモを添えています。</p>
-        </article>
       </div>
     </section>
 
