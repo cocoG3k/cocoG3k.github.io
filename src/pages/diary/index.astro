@@ -30,9 +30,9 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
       </div>
     </section>
 
-    <section class="diary-list">
+    <section class="diary-list diary-card-grid">
       {diaryEntries.map((entry) => (
-        <a class="diary-entry" href={`/diary/${entry.slug}`}>
+        <a class="diary-entry diary-card" href={`/diary/${entry.slug}`}>
           <span class="entry-date">{formatDate(entry.data.date)}</span>
           <h3>{entry.data.title}</h3>
           <p>{entry.data.description}</p>

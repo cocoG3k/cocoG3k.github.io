@@ -49,9 +49,9 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
 
     <section id="diary">
       <h2 class="section-title">日々の記録</h2>
-      <div class="diary-list">
+      <div class="diary-list diary-card-grid">
         {diaryEntries.map((entry) => (
-          <article class="diary-entry">
+          <article class="diary-entry diary-card">
             <span class="entry-date">{formatDate(entry.data.date)}</span>
             <h3>{entry.data.title}</h3>
             <p>{entry.data.description}</p>
