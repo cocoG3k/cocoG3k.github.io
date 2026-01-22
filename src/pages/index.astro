@@ -18,8 +18,8 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
       <div class="brand">Coco G3k</div>
       <nav>
         <a href="/diary">日記一覧</a>
-        <a href="/diary">最新の記録</a>
-        <a href="/diary">メモ</a>
+        <a href="/diary">最新記事</a>
+        <a href="/diary">記事の余白</a>
         <a href="/diary">この場所</a>
         <a href="/diary">おたより</a>
       </nav>
@@ -39,16 +39,16 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
         </div>
       </div>
       <div class="card">
-        <h3>今朝のメモ</h3>
+        <h3>最新記事の一節</h3>
         <p>
-          窓を開けると、雨上がりの匂いがふわり。今日は湯気の立つカップと、
-          うすい靴下がちょうどいい一日。
+          窓を開けると、雨上がりの匂いがふわり。最新の記事に書いた、
+          湯気の立つカップと、うすい靴下がちょうどいい一日。
         </p>
       </div>
     </section>
 
     <section id="diary">
-      <h2 class="section-title">日々の記録</h2>
+      <h2 class="section-title">最新記事</h2>
       <div class="diary-list diary-card-grid">
         {diaryEntries.map((entry) => (
           <article class="diary-entry diary-card">
@@ -58,22 +58,18 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
           </article>
         ))}
       </div>
-    </section>
-
-    <section id="notes">
-      <h2 class="section-title">小さなメモ</h2>
-      <div class="card-grid">
+      <div class="card-grid" style="margin-top: 24px;">
         <article class="card">
-          <h3>好きな時間帯</h3>
-          <p>午前9時の静けさと、夕方17時の光の色が好き。</p>
+          <h3>最近の気づき</h3>
+          <p>午前9時の静けさと、夕方17時の光の色を今日の記事にまとめました。</p>
         </article>
         <article class="card">
-          <h3>最近聴いている音</h3>
-          <p>柔らかなピアノと、湯気のように薄いアンビエント。</p>
+          <h3>今日の音</h3>
+          <p>柔らかなピアノと、湯気のように薄いアンビエントを最新記事で紹介。</p>
         </article>
         <article class="card">
           <h3>手帳の一言</h3>
-          <p>「ゆっくりでも、少しずつ」。深呼吸して進む。</p>
+          <p>「ゆっくりでも、少しずつ」。最新記事に小さなメモを添えています。</p>
         </article>
       </div>
     </section>
