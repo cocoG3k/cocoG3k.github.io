@@ -316,11 +316,38 @@ footer {
   padding-top: 32px;
   border-top: 1px solid var(--card-border);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 16px;
   color: rgba(42, 42, 42, 0.6);
   font-size: 0.9rem;
+}
+
+.footer-card {
+  display: grid;
+  gap: 6px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 12px 24px rgba(72, 58, 42, 0.06);
+}
+
+.footer-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(42, 42, 42, 0.5);
+}
+
+.footer-card a {
+  color: rgba(42, 42, 42, 0.75);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.footer-card a:hover {
+  color: #4f6f5b;
 }
 
 @media (max-width: 640px) {
