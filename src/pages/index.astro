@@ -52,11 +52,13 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
       <h2 class="section-title">最新記事</h2>
       <div class="diary-list diary-card-grid">
         {diaryEntries.map((entry) => (
-          <article class="diary-entry diary-card">
-            <span class="entry-date">{formatDate(entry.data.date)}</span>
-            <h3>{entry.data.title}</h3>
-            <p>{entry.data.description}</p>
-          </article>
+          <a class="diary-entry-link" href={`/diary/${entry.slug}`}>
+            <article class="diary-entry diary-card">
+              <span class="entry-date">{formatDate(entry.data.date)}</span>
+              <h3>{entry.data.title}</h3>
+              <p>{entry.data.description}</p>
+            </article>
+          </a>
         ))}
       </div>
     </section>
