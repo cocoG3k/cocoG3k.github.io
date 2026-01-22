@@ -119,6 +119,36 @@ nav a:hover {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.diary-list {
+  display: grid;
+  gap: 16px;
+}
+
+.diary-entry {
+  padding: 20px 24px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(42, 42, 42, 0.08);
+  box-shadow: 0 12px 28px rgba(72, 58, 42, 0.06);
+}
+
+.diary-entry h3 {
+  margin: 8px 0 10px;
+  font-size: 1.05rem;
+}
+
+.diary-entry p {
+  color: rgba(42, 42, 42, 0.72);
+  font-size: 0.95rem;
+}
+
+.entry-date {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(42, 42, 42, 0.5);
+}
+
 .card {
   padding: 24px;
   background: var(--card);

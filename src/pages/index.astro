@@ -10,10 +10,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <header>
       <div class="brand">Coco G3k</div>
       <nav>
-        <a href="#intro">Intro</a>
-        <a href="#diary">Diary</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#intro">はじめに</a>
+        <a href="#diary">日々の記録</a>
+        <a href="#notes">メモ</a>
+        <a href="#about">この場所</a>
+        <a href="#contact">おたより</a>
       </nav>
     </header>
 
@@ -27,7 +28,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
         <div class="hero-actions">
           <a class="button primary" href="#diary">最新の記録を見る</a>
-          <a class="button" href="#contact">静かに話しかける</a>
+          <a class="button" href="#contact">おたよりを送る</a>
         </div>
       </div>
       <div class="card">
@@ -40,29 +41,51 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <section id="diary">
-      <h2 class="section-title">Latest Diary</h2>
-      <div class="card-grid">
-        <article class="card">
-          <h3>2024.10.18 - 秋のはじまり</h3>
+      <h2 class="section-title">日々の記録</h2>
+      <div class="diary-list">
+        <article class="diary-entry">
+          <span class="entry-date">2024.10.18</span>
+          <h3>秋のはじまり</h3>
           <p>薄いニットを出した。金木犀の香りが遠くから届くような午後。</p>
         </article>
-        <article class="card">
-          <h3>2024.10.12 - 夜の散歩</h3>
+        <article class="diary-entry">
+          <span class="entry-date">2024.10.12</span>
+          <h3>夜の散歩</h3>
           <p>路地の光がやさしくて、音楽のテンポが少しだけ遅くなる。</p>
         </article>
-        <article class="card">
-          <h3>2024.10.02 - 静かな作業日</h3>
+        <article class="diary-entry">
+          <span class="entry-date">2024.10.02</span>
+          <h3>静かな作業日</h3>
           <p>短い集中の合間に、窓の外を眺める時間が心地いい。</p>
         </article>
-        <article class="card">
-          <h3>2024.09.24 - 朝の机</h3>
+        <article class="diary-entry">
+          <span class="entry-date">2024.09.24</span>
+          <h3>朝の机</h3>
           <p>白い花瓶の影がきれいに伸びて、少しだけ季節が進んだ。</p>
         </article>
       </div>
     </section>
 
+    <section id="notes">
+      <h2 class="section-title">小さなメモ</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>好きな時間帯</h3>
+          <p>午前9時の静けさと、夕方17時の光の色が好き。</p>
+        </article>
+        <article class="card">
+          <h3>最近聴いている音</h3>
+          <p>柔らかなピアノと、湯気のように薄いアンビエント。</p>
+        </article>
+        <article class="card">
+          <h3>手帳の一言</h3>
+          <p>「ゆっくりでも、少しずつ」。深呼吸して進む。</p>
+        </article>
+      </div>
+    </section>
+
     <section id="about">
-      <h2 class="section-title">About</h2>
+      <h2 class="section-title">この場所について</h2>
       <div class="timeline">
         <div class="timeline-item">
           <span class="badge">Daily</span>
@@ -83,7 +106,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <section id="contact">
-      <h2 class="section-title">Let’s Talk</h2>
+      <h2 class="section-title">おたより</h2>
       <div class="card">
         <p>
           ひとことでも、長い手紙でも。静かにやりとりできる場所として使っています。
