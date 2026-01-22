@@ -21,7 +21,11 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
 <BaseLayout title={`cocoG | ${entry.data.title}`} description={entry.data.description}>
   <main>
     <header>
-      <div class="brand">Coco G3k</div>
+      <div class="brand">
+        <a href="/" aria-label="cocoG">
+          <img src="/cocog-logo.png" alt="cocoG" />
+        </a>
+      </div>
       <nav>
         <a href="/">ホーム</a>
         <a href="/diary">日記一覧</a>
