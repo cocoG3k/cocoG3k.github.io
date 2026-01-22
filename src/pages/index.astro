@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Coco G3k | Digital Atelier"
+  description="Astroで構築した、クリエイティブなポートフォリオページ"
+>
+  <main>
+    <header>
+      <div class="brand">Coco G3k</div>
+      <nav>
+        <a href="#concept">Concept</a>
+        <a href="#works">Works</a>
+        <a href="#flow">Flow</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="concept">
+      <div>
+        <span class="badge">Astro / Creative Direction</span>
+        <h1>静けさと躍動を両立する、デジタルアトリエ。</h1>
+        <p>
+          物語のあるビジュアル、滑らかな体験設計、そして拡張性を両立したUIを提案します。
+          Astroで高速に仕立てるため、伝えたい価値がすぐに形になります。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#contact">プロジェクトを相談</a>
+          <a class="button" href="#works">制作事例を見る</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Design Moodboard</h3>
+        <p>
+          透明感のあるレイヤーと光のグラデーションで、夜に浮かぶギャラリー空間を演出。
+          余白とタイポグラフィを整え、ブランドストーリーを丁寧に描きます。
+        </p>
+      </div>
+    </section>
+
+    <section id="works">
+      <h2 class="section-title">Featured Works</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Immersive Landing</h3>
+          <p>感情に寄り添うヒーローセクションと、ストーリー型の情報設計。</p>
+        </article>
+        <article class="card">
+          <h3>Brand Microsite</h3>
+          <p>ブランドの新章を象徴するコンパクトな体験を構築。</p>
+        </article>
+        <article class="card">
+          <h3>Product Narrative</h3>
+          <p>プロダクトの価値を段階的に伝える、滑らかなページ構成。</p>
+        </article>
+        <article class="card">
+          <h3>Event Visual</h3>
+          <p>ライブ感のあるモーションと空気感を静的デザインで表現。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="flow">
+      <h2 class="section-title">Creative Flow</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="badge">01</span>
+          <h3>Discovery</h3>
+          <p>ブランドの核や届けたい感情をヒアリングし、共通言語を整えます。</p>
+        </div>
+        <div class="timeline-item">
+          <span class="badge">02</span>
+          <h3>Visual Direction</h3>
+          <p>ムードボードとワイヤーフレームで世界観を具体化します。</p>
+        </div>
+        <div class="timeline-item">
+          <span class="badge">03</span>
+          <h3>Astro Build</h3>
+          <p>高速で洗練されたフロントを構築し、運用しやすい構造に。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Let’s Talk</h2>
+      <div class="card">
+        <p>
+          新しいページやブランド刷新など、どんな相談でも歓迎です。
+          下記アドレスまでお気軽にご連絡ください。
+        </p>
+        <p style="margin-top: 16px; font-weight: 600;">hello@cocog3k.studio</p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2024 Coco G3k. Crafted with Astro.</span>
+      <span>Tokyo / Remote</span>
+    </footer>
+  </main>
+</BaseLayout>
