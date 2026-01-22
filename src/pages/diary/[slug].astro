@@ -33,6 +33,20 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
         <span class="entry-date">{formatDate(entry.data.date)}</span>
         <h1>{entry.data.title}</h1>
         <p>{entry.data.description}</p>
+        <div class="entry-meta">
+          <div class="entry-meta-group">
+            <span class="entry-meta-label">Date</span>
+            <span>{formatDate(entry.data.date)}</span>
+          </div>
+          <div class="entry-meta-group">
+            <span class="entry-meta-label">Tags</span>
+            <div class="tag-list">
+              {(entry.data.tags ?? ["未設定"]).map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
         <div class="hero-actions">
           <a class="button" href="/diary">一覧へ戻る</a>
         </div>
@@ -43,7 +57,7 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
       </div>
     </section>
 
-    <article class="card" style="margin-top: 24px;">
+    <article class="card prose" style="margin-top: 24px;">
       <Content />
     </article>
 
