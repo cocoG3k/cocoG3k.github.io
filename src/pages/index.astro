@@ -17,11 +17,11 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
     <header>
       <div class="brand">Coco G3k</div>
       <nav>
-        <a href="#intro">はじめに</a>
-        <a href="#diary">日々の記録</a>
-        <a href="#notes">メモ</a>
-        <a href="#about">この場所</a>
-        <a href="#contact">おたより</a>
+        <a href="/diary">日記一覧</a>
+        <a href="/diary">最新の記録</a>
+        <a href="/diary">メモ</a>
+        <a href="/diary">この場所</a>
+        <a href="/diary">おたより</a>
       </nav>
     </header>
 
@@ -34,8 +34,8 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
           ひと息つけるような、穏やかな余白のあるページを目指しました。
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#diary">最新の記録を見る</a>
-          <a class="button" href="#contact">おたよりを送る</a>
+          <a class="button primary" href="/diary">最新の記録を見る</a>
+          <a class="button" href="/diary">日記一覧へ</a>
         </div>
       </div>
       <div class="card">
