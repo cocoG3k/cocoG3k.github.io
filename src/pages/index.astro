@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Coco G3k | 小さな日記"
+  description="Astroで作る、穏やかな日記の個人ページ"
+>
+  <main>
+    <header>
+      <div class="brand">Coco G3k</div>
+      <nav>
+        <a href="#intro">Intro</a>
+        <a href="#diary">Diary</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="intro">
+      <div>
+        <span class="badge">穏やかな日記 / Coffee & Light</span>
+        <h1>静かな日々を、やわらかく綴る場所。</h1>
+        <p>
+          朝の光やお気に入りの音楽、ふと浮かんだことを短い文章で記録しています。
+          ひと息つけるような、穏やかな余白のあるページを目指しました。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#diary">最新の記録を見る</a>
+          <a class="button" href="#contact">静かに話しかける</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>今朝のメモ</h3>
+        <p>
+          窓を開けると、雨上がりの匂いがふわり。今日は湯気の立つカップと、
+          うすい靴下がちょうどいい一日。
+        </p>
+      </div>
+    </section>
+
+    <section id="diary">
+      <h2 class="section-title">Latest Diary</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>2024.10.18 - 秋のはじまり</h3>
+          <p>薄いニットを出した。金木犀の香りが遠くから届くような午後。</p>
+        </article>
+        <article class="card">
+          <h3>2024.10.12 - 夜の散歩</h3>
+          <p>路地の光がやさしくて、音楽のテンポが少しだけ遅くなる。</p>
+        </article>
+        <article class="card">
+          <h3>2024.10.02 - 静かな作業日</h3>
+          <p>短い集中の合間に、窓の外を眺める時間が心地いい。</p>
+        </article>
+        <article class="card">
+          <h3>2024.09.24 - 朝の机</h3>
+          <p>白い花瓶の影がきれいに伸びて、少しだけ季節が進んだ。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="badge">Daily</span>
+          <h3>暮らしのリズム</h3>
+          <p>朝はゆっくり、夜は灯りを落として。小さな変化を大切にしています。</p>
+        </div>
+        <div class="timeline-item">
+          <span class="badge">Notes</span>
+          <h3>記録の仕方</h3>
+          <p>写真や短い文章で、その日の気分や光の色を残します。</p>
+        </div>
+        <div class="timeline-item">
+          <span class="badge">Quiet</span>
+          <h3>この場所について</h3>
+          <p>静かな時間に寄り添えるよう、読みやすさを第一にしています。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Let’s Talk</h2>
+      <div class="card">
+        <p>
+          ひとことでも、長い手紙でも。静かにやりとりできる場所として使っています。
+          下記アドレスまでお気軽にどうぞ。
+        </p>
+        <p style="margin-top: 16px; font-weight: 600;">hello@cocog3k.studio</p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2024 Coco G3k. Written with calm.</span>
+      <span>Tokyo / Home desk</span>
+    </footer>
+  </main>
+</BaseLayout>
