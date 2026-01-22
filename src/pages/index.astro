@@ -3,99 +3,122 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Coco G3k | Digital Atelier"
-  description="Astroで構築した、クリエイティブなポートフォリオページ"
+  title="Coco G3k | 小さな日記"
+  description="Astroで作る、穏やかな日記の個人ページ"
 >
   <main>
     <header>
       <div class="brand">Coco G3k</div>
       <nav>
-        <a href="#concept">Concept</a>
-        <a href="#works">Works</a>
-        <a href="#flow">Flow</a>
-        <a href="#contact">Contact</a>
+        <a href="#intro">はじめに</a>
+        <a href="#diary">日々の記録</a>
+        <a href="#notes">メモ</a>
+        <a href="#about">この場所</a>
+        <a href="#contact">おたより</a>
       </nav>
     </header>
 
-    <section class="hero" id="concept">
+    <section class="hero" id="intro">
       <div>
-        <span class="badge">Astro / Creative Direction</span>
-        <h1>静けさと躍動を両立する、デジタルアトリエ。</h1>
+        <span class="badge">穏やかな日記 / Coffee & Light</span>
+        <h1>静かな日々を、やわらかく綴る場所。</h1>
         <p>
-          物語のあるビジュアル、滑らかな体験設計、そして拡張性を両立したUIを提案します。
-          Astroで高速に仕立てるため、伝えたい価値がすぐに形になります。
+          朝の光やお気に入りの音楽、ふと浮かんだことを短い文章で記録しています。
+          ひと息つけるような、穏やかな余白のあるページを目指しました。
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#contact">プロジェクトを相談</a>
-          <a class="button" href="#works">制作事例を見る</a>
+          <a class="button primary" href="#diary">最新の記録を見る</a>
+          <a class="button" href="#contact">おたよりを送る</a>
         </div>
       </div>
       <div class="card">
-        <h3>Design Moodboard</h3>
+        <h3>今朝のメモ</h3>
         <p>
-          透明感のあるレイヤーと光のグラデーションで、夜に浮かぶギャラリー空間を演出。
-          余白とタイポグラフィを整え、ブランドストーリーを丁寧に描きます。
+          窓を開けると、雨上がりの匂いがふわり。今日は湯気の立つカップと、
+          うすい靴下がちょうどいい一日。
         </p>
       </div>
     </section>
 
-    <section id="works">
-      <h2 class="section-title">Featured Works</h2>
-      <div class="card-grid">
-        <article class="card">
-          <h3>Immersive Landing</h3>
-          <p>感情に寄り添うヒーローセクションと、ストーリー型の情報設計。</p>
+    <section id="diary">
+      <h2 class="section-title">日々の記録</h2>
+      <div class="diary-list">
+        <article class="diary-entry">
+          <span class="entry-date">2024.10.18</span>
+          <h3>秋のはじまり</h3>
+          <p>薄いニットを出した。金木犀の香りが遠くから届くような午後。</p>
         </article>
-        <article class="card">
-          <h3>Brand Microsite</h3>
-          <p>ブランドの新章を象徴するコンパクトな体験を構築。</p>
+        <article class="diary-entry">
+          <span class="entry-date">2024.10.12</span>
+          <h3>夜の散歩</h3>
+          <p>路地の光がやさしくて、音楽のテンポが少しだけ遅くなる。</p>
         </article>
-        <article class="card">
-          <h3>Product Narrative</h3>
-          <p>プロダクトの価値を段階的に伝える、滑らかなページ構成。</p>
+        <article class="diary-entry">
+          <span class="entry-date">2024.10.02</span>
+          <h3>静かな作業日</h3>
+          <p>短い集中の合間に、窓の外を眺める時間が心地いい。</p>
         </article>
-        <article class="card">
-          <h3>Event Visual</h3>
-          <p>ライブ感のあるモーションと空気感を静的デザインで表現。</p>
+        <article class="diary-entry">
+          <span class="entry-date">2024.09.24</span>
+          <h3>朝の机</h3>
+          <p>白い花瓶の影がきれいに伸びて、少しだけ季節が進んだ。</p>
         </article>
       </div>
     </section>
 
-    <section id="flow">
-      <h2 class="section-title">Creative Flow</h2>
+    <section id="notes">
+      <h2 class="section-title">小さなメモ</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>好きな時間帯</h3>
+          <p>午前9時の静けさと、夕方17時の光の色が好き。</p>
+        </article>
+        <article class="card">
+          <h3>最近聴いている音</h3>
+          <p>柔らかなピアノと、湯気のように薄いアンビエント。</p>
+        </article>
+        <article class="card">
+          <h3>手帳の一言</h3>
+          <p>「ゆっくりでも、少しずつ」。深呼吸して進む。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">この場所について</h2>
       <div class="timeline">
         <div class="timeline-item">
-          <span class="badge">01</span>
-          <h3>Discovery</h3>
-          <p>ブランドの核や届けたい感情をヒアリングし、共通言語を整えます。</p>
+          <span class="badge">Daily</span>
+          <h3>暮らしのリズム</h3>
+          <p>朝はゆっくり、夜は灯りを落として。小さな変化を大切にしています。</p>
         </div>
         <div class="timeline-item">
-          <span class="badge">02</span>
-          <h3>Visual Direction</h3>
-          <p>ムードボードとワイヤーフレームで世界観を具体化します。</p>
+          <span class="badge">Notes</span>
+          <h3>記録の仕方</h3>
+          <p>写真や短い文章で、その日の気分や光の色を残します。</p>
         </div>
         <div class="timeline-item">
-          <span class="badge">03</span>
-          <h3>Astro Build</h3>
-          <p>高速で洗練されたフロントを構築し、運用しやすい構造に。</p>
+          <span class="badge">Quiet</span>
+          <h3>この場所について</h3>
+          <p>静かな時間に寄り添えるよう、読みやすさを第一にしています。</p>
         </div>
       </div>
     </section>
 
     <section id="contact">
-      <h2 class="section-title">Let’s Talk</h2>
+      <h2 class="section-title">おたより</h2>
       <div class="card">
         <p>
-          新しいページやブランド刷新など、どんな相談でも歓迎です。
-          下記アドレスまでお気軽にご連絡ください。
+          ひとことでも、長い手紙でも。静かにやりとりできる場所として使っています。
+          下記アドレスまでお気軽にどうぞ。
         </p>
         <p style="margin-top: 16px; font-weight: 600;">hello@cocog3k.studio</p>
       </div>
     </section>
 
     <footer>
-      <span>© 2024 Coco G3k. Crafted with Astro.</span>
-      <span>Tokyo / Remote</span>
+      <span>© 2024 Coco G3k. Written with calm.</span>
+      <span>Tokyo / Home desk</span>
     </footer>
   </main>
 </BaseLayout>
