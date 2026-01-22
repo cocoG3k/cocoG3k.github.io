@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 const diaryEntries = (await getCollection("diary")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
+const latestEntry = diaryEntries[0];
 
 const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g, ".");
 ---
@@ -30,7 +31,12 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
           真髄はここに
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="/diary">最新の記録を見る</a>
+          <a
+            class="button primary"
+            href={latestEntry ? `/diary/${latestEntry.slug}` : '/diary'}
+          >
+            最新の記録を見る
+          </a>
           <a class="button" href="/diary">記事一覧へ</a>
         </div>
       </div>
