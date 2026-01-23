@@ -237,24 +237,27 @@ nav a:hover {
 }
 
 .nav-links {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
 }
 
 .nav-link {
+  flex: 1;
+  min-width: 240px;
+  max-width: 45%;
   display: grid;
   gap: 6px;
+  /* padding, border, background, shadow are handled by .card class now, but hover effect needs check */
   padding: 18px;
   border-radius: 16px;
-  border: 1px solid rgba(42, 42, 42, 0.08);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 12px 24px rgba(72, 58, 42, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .nav-link:hover {
   transform: translateY(-3px);
+  /* Use card styling or override? The card class adds shadows too. */
   box-shadow: 0 16px 32px rgba(72, 58, 42, 0.12);
 }
 

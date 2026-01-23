@@ -1,1 +1,5 @@
 public/cocog-logo.png
+node_modules/
+.astro/
+dist/
+.DS_Store
