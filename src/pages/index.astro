@@ -73,5 +73,53 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
         </a>
       </div>
     </footer>
+    <button type="button" class="secret-entry" aria-label="Admin access"></button>
   </main>
+
+  <style>
+    .secret-entry {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(127, 159, 139, 0.35);
+      opacity: 0.08;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .secret-entry:hover {
+      opacity: 0.22;
+    }
+  </style>
+
+  <script>
+    const secretButton = document.querySelector(".secret-entry");
+
+    secretButton?.addEventListener("click", async () => {
+      const token = window.prompt("管理トークンを入力してください");
+      if (!token) return;
+
+      try {
+        const response = await fetch("/api/auth", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        });
+
+        if (!response.ok) {
+          alert("認証に失敗しました。");
+          return;
+        }
+
+        window.location.href = "/admin/editor";
+      } catch (error) {
+        console.error(error);
+        alert("認証処理でエラーが発生しました。");
+      }
+    });
+  </script>
 </BaseLayout>
