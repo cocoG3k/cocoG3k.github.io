@@ -236,6 +236,45 @@ nav a:hover {
   font-size: 0.95rem;
 }
 
+.nav-links {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.nav-link {
+  display: grid;
+  gap: 6px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(42, 42, 42, 0.08);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 12px 24px rgba(72, 58, 42, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(72, 58, 42, 0.12);
+}
+
+.nav-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(42, 42, 42, 0.5);
+}
+
+.nav-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.nav-date {
+  font-size: 0.85rem;
+  color: rgba(42, 42, 42, 0.6);
+}
+
 .prose {
   line-height: 1.85;
   color: rgba(42, 42, 42, 0.85);
