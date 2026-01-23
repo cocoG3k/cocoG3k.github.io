@@ -91,18 +91,18 @@ const prevEntry =
 
     {(nextEntry || prevEntry) && (
       <section class="nav-links" style="margin-top: 48px;">
-        {prevEntry && (
-          <a class="card nav-link" href={`/diary/${prevEntry.slug}`} style={{ marginRight: 'auto' }}>
-            <span class="nav-label">前の記事</span>
-            <span class="nav-title">{prevEntry.data.title}</span>
-            <span class="nav-date">{formatDate(prevEntry.data.date)}</span>
-          </a>
-        )}
         {nextEntry && (
           <a class="card nav-link" href={`/diary/${nextEntry.slug}`} style={{ marginLeft: 'auto' }}>
             <span class="nav-label">次の記事</span>
             <span class="nav-title">{nextEntry.data.title}</span>
             <span class="nav-date">{formatDate(nextEntry.data.date)}</span>
+          </a>
+        )}
+        {prevEntry && (
+          <a class="card nav-link" href={`/diary/${prevEntry.slug}`} style={{ marginRight: 'auto' }}>
+            <span class="nav-label">前の記事</span>
+            <span class="nav-title">{prevEntry.data.title}</span>
+            <span class="nav-date">{formatDate(prevEntry.data.date)}</span>
           </a>
         )}
       </section>
