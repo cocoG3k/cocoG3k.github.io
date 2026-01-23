@@ -1,0 +1,242 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Diary Editor">
+  <main>
+    <header>
+      <div class="brand">
+        <a href="/">Coco G3k</a>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/diary">Diary</a>
+      </nav>
+    </header>
+
+    <section class="editor">
+      <div>
+        <h1>Diary Entry Editor</h1>
+        <p class="lead">
+          新しい日記エントリーを作成します。認証済みの場合のみ操作できます。
+        </p>
+        <div class="notice">
+          <h2>認証と運用メモ</h2>
+          <ul>
+            <li>
+              認証はホームページの隠しボタンから行います。<code>ADMIN_TOKEN</code> をサーバー環境変数に設定してください。
+            </li>
+            <li>
+              GitHub API で <code>src/content/diary/&lt;slug&gt;.md</code> をコミットするため、
+              <code>GITHUB_TOKEN</code> / <code>GITHUB_OWNER</code> / <code>GITHUB_REPO</code> が必要です。
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <form id="editor-form" class="editor-form">
+        <label>
+          <span>タイトル</span>
+          <input name="title" type="text" required />
+        </label>
+
+        <label>
+          <span>説明</span>
+          <input name="description" type="text" required />
+        </label>
+
+        <label>
+          <span>日付</span>
+          <input name="date" type="date" required />
+        </label>
+
+        <label>
+          <span>タグ（カンマ区切り）</span>
+          <input name="tags" type="text" placeholder="writing, travel" />
+        </label>
+
+        <label>
+          <span>スラッグ</span>
+          <input name="slug" type="text" placeholder="2024-01-01-my-entry" />
+          <small>未入力の場合はタイトルから自動生成します。</small>
+        </label>
+
+        <label>
+          <span>本文</span>
+          <textarea name="body" rows="10" required></textarea>
+        </label>
+
+        <button type="submit" class="button primary">送信</button>
+        <p id="status" role="status" class="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <style>
+    .editor {
+      display: grid;
+      gap: 32px;
+      padding: 40px 0;
+    }
+
+    .lead {
+      margin-top: 12px;
+      color: rgba(42, 42, 42, 0.7);
+    }
+
+    .notice {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(42, 42, 42, 0.1);
+    }
+
+    .notice h2 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .notice ul {
+      display: grid;
+      gap: 8px;
+      padding-left: 20px;
+      color: rgba(42, 42, 42, 0.75);
+      font-size: 0.95rem;
+    }
+
+    .editor-form {
+      display: grid;
+      gap: 18px;
+      padding: 24px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(42, 42, 42, 0.1);
+      box-shadow: 0 12px 24px rgba(72, 58, 42, 0.08);
+    }
+
+    .editor-form label {
+      display: grid;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: rgba(42, 42, 42, 0.8);
+    }
+
+    .editor-form input,
+    .editor-form textarea {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(42, 42, 42, 0.2);
+      font: inherit;
+      background: #fff;
+    }
+
+    .editor-form small {
+      color: rgba(42, 42, 42, 0.55);
+    }
+
+    .status {
+      min-height: 1.5em;
+      font-weight: 600;
+    }
+
+    .status.success {
+      color: #1e6b4d;
+    }
+
+    .status.error {
+      color: #a6433a;
+    }
+  </style>
+
+  <script>
+    const form = document.querySelector("#editor-form");
+    const status = document.querySelector("#status");
+    const slugInput = form.querySelector("input[name=slug]");
+    const titleInput = form.querySelector("input[name=title]");
+    const dateInput = form.querySelector("input[name=date]");
+    const submitButton = form.querySelector("button[type=submit]");
+    const ensureAuthorized = async () => {
+      const response = await fetch("/api/auth-status");
+      if (!response.ok) {
+        window.location.href = "/";
+        return false;
+      }
+      return true;
+    };
+
+    const slugify = (value) =>
+      value
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9-]/g, "")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+
+    const updateSlug = () => {
+      if (slugInput.value.trim()) return;
+      const titleSlug = slugify(titleInput.value);
+      const dateSlug = dateInput.value;
+      const composed = [dateSlug, titleSlug].filter(Boolean).join("-");
+      slugInput.value = composed;
+    };
+
+    titleInput.addEventListener("input", updateSlug);
+    dateInput.addEventListener("input", updateSlug);
+
+    window.addEventListener("DOMContentLoaded", ensureAuthorized);
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (form.dataset.submitting === "true") return;
+
+      status.textContent = "送信中...";
+      status.className = "status";
+      form.dataset.submitting = "true";
+      submitButton.disabled = true;
+
+      const formData = new FormData(form);
+      const tagsRaw = formData.get("tags");
+      const tags = typeof tagsRaw === "string" && tagsRaw.trim()
+        ? tagsRaw.split(",").map((tag) => tag.trim()).filter(Boolean)
+        : [];
+
+      const payload = {
+        title: formData.get("title"),
+        description: formData.get("description"),
+        date: formData.get("date"),
+        tags,
+        body: formData.get("body"),
+        slug: formData.get("slug"),
+      };
+
+      try {
+        const response = await fetch("/api/create-entry", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "エラーが発生しました。");
+        }
+
+        status.textContent = `保存しました: ${result.path}`;
+        status.classList.add("success");
+        form.reset();
+        slugInput.value = "";
+      } catch (error) {
+        status.textContent = error.message;
+        status.classList.add("error");
+      } finally {
+        form.dataset.submitting = "false";
+        submitButton.disabled = false;
+      }
+    });
+  </script>
+</BaseLayout>
