@@ -9,6 +9,9 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const entry = await getEntryBySlug("diary", slug);
+const diaryEntries = (await getCollection("diary")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 
 if (!entry) {
   throw new Error(`Diary entry not found: ${slug}`);
@@ -16,6 +19,12 @@ if (!entry) {
 
 const { Content } = await entry.render();
 const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g, ".");
+const currentIndex = diaryEntries.findIndex((diaryEntry) => diaryEntry.slug === entry.slug);
+const nextEntry = currentIndex > 0 ? diaryEntries[currentIndex - 1] : undefined;
+const prevEntry =
+  currentIndex >= 0 && currentIndex < diaryEntries.length - 1
+    ? diaryEntries[currentIndex + 1]
+    : undefined;
 ---
 
 <BaseLayout title={`cocoG | ${entry.data.title}`} description={entry.data.description}>
@@ -79,6 +88,25 @@ const formatDate = (date: Date) => date.toISOString().split("T")[0].replace(/-/g
         async
       ></script>
     </section>
+
+    {(nextEntry || prevEntry) && (
+      <section class="card nav-links" style="margin-top: 24px;">
+        {prevEntry && (
+          <a class="nav-link" href={`/diary/${prevEntry.slug}`}>
+            <span class="nav-label">前の記事</span>
+            <span class="nav-title">{prevEntry.data.title}</span>
+            <span class="nav-date">{formatDate(prevEntry.data.date)}</span>
+          </a>
+        )}
+        {nextEntry && (
+          <a class="nav-link" href={`/diary/${nextEntry.slug}`}>
+            <span class="nav-label">次の記事</span>
+            <span class="nav-title">{nextEntry.data.title}</span>
+            <span class="nav-date">{formatDate(nextEntry.data.date)}</span>
+          </a>
+        )}
+      </section>
+    )}
 
     <footer>
       <span>© 2026 cocoG. Written with calm.</span>
