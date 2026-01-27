@@ -323,6 +323,12 @@ nav a:hover {
   padding-bottom: 12px;
 }
 
+.prose iframe {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .prose a {
   color: rgba(127, 159, 139, 1);
   border-bottom: 1px solid rgba(127, 159, 139, 0.4);
