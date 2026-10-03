@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { categoryOf, searchableBody } from "../lib/entries.js";
+const entries = (await getCollection("diary")).map((entry) => ({
+  slug: entry.slug, title: entry.data.title, description: entry.data.description,
+  date: entry.data.date.toISOString().slice(0, 10), tags: entry.data.tags ?? [],
+  category: entry.data.category, body: searchableBody(entry.body),
+})).sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
+const categories = [...new Set(entries.map(categoryOf))].sort((a,b) => { const order = ["日記", "曲紹介"]; return (order.includes(a) ? order.indexOf(a) : 2) - (order.includes(b) ? order.indexOf(b) : 2) || a.localeCompare(b,"ja"); });
+const tags = [...new Set(entries.flatMap((entry) => entry.tags))].sort((a,b) => a.localeCompare(b,"ja"));
+const months = [...new Set(entries.map((entry) => entry.date.slice(0, 7)))].sort().reverse();
+const monthLabel = (month: string) => `${month.slice(0, 4)}年${Number(month.slice(5))}月`;
+---
+<BaseLayout title="cocoG学入門 — 記事一覧" total={entries.length}>
+  <div class="layout">
+    <main id="main" class="main-content">
+      <div class="list-heading"><h1 style="font-size:18px;margin:0;font-weight:600">記事一覧</h1><span class="total">全{entries.length}件</span></div>
+      <form id="search-form" class="search-controls" role="search">
+        <div class="search"><input id="query" name="q" type="search" aria-label="記事を検索" placeholder="記事を検索（タイトル・本文）" /><button type="submit">検索</button></div>
+        <div class="filters">
+          <div class="filter-group" role="group" aria-label="カテゴリー">
+            <button type="button" data-category="" aria-pressed="true">すべて<span>{entries.length}</span></button>
+            {categories.map((category) => <button type="button" data-category={category} aria-pressed="false">{category}<span>{entries.filter((entry) => categoryOf(entry) === category).length}</span></button>)}
+          </div>
+          <div class="sort-wrap"><select id="sort" name="sort" aria-label="並び順"><option value="new">新しい順</option><option value="old">古い順</option></select></div>
+        </div>
+        <details class="advanced-filters" id="advanced-filters"><summary>タグ・月で絞り込む</summary><div class="advanced-fields">
+          <label>タグ<select id="tag" name="tag"><option value="">すべて</option>{tags.map((tag) => <option value={tag}>{tag}</option>)}</select></label>
+          <label>月<select id="month-filter" name="month"><option value="">すべて</option>{months.map((month) => <option value={month}>{monthLabel(month)}</option>)}</select></label>
+        </div></details>
+        <p id="filter-summary" class="filter-summary" hidden><span id="filter-text"></span> <button type="reset" class="reset">条件をリセット</button></p>
+      </form>
+      <noscript><p class="noscript">検索・絞り込みにはJavaScriptが必要です。すべての記事を新しい順に表示しています。</p></noscript>
+      <div class="table-heading" aria-hidden="true"><span>日付</span><span>タイトル / 概要</span><span>カテゴリー</span></div>
+      <div class="entries" id="entries">
+        {entries.map((entry) => <article class="entry" data-slug={entry.slug}>
+          <time class="date" datetime={entry.date}>{entry.date.replaceAll("-", ".")}</time>
+          <div><h2><a class="title" href={`/diary/${entry.slug}`}>{entry.title}</a></h2><p class="description">{entry.description}</p></div>
+          <span class="category">{categoryOf(entry)}</span>
+        </article>)}
+      </div>
+      <div class="empty" id="empty" hidden><p>該当する記事がありません。条件を変えて検索してください。</p><button class="reset" id="empty-reset" type="button">すべての記事を表示</button></div>
+      <div class="list-bottom"><span id="result-count" role="status" aria-live="polite" aria-atomic="true">{entries.length ? `1–${entries.length} / ${entries.length}件` : "0件"}</span><span id="date-range">{months.length === 1 ? `${monthLabel(months[0])}の記録` : "日々の記録"}</span></div>
+      <p class="note"><strong>近頃の一言</strong>堅揚げポテトの値上げ、効く</p>
+    </main>
+    <aside class="sidebar" aria-label="ブログ情報">
+      <section><h2 style="font-size:13px;margin:0 0 11px;padding-bottom:8px;border-bottom:1px solid var(--rule)">月別アーカイブ</h2><ul>
+        {months.map((month) => <li class="month"><a href={`/diary?month=${month}`} data-month={month}>{monthLabel(month)}</a><span class="count">{entries.filter((entry) => entry.date.startsWith(month)).length}件</span></li>)}
+      </ul></section>
+      <section><h3>このブログについて</h3><p class="name">cocoG</p><p>日記と、聴いた曲の記録。</p><a href="/about">このブログについて</a></section>
+    </aside>
+  </div>
+  <script type="application/json" id="search-data" set:html={JSON.stringify(entries).replace(/</g, "\u003c")} />
+  <script>import "../scripts/article-index.js";</script>
+</BaseLayout>

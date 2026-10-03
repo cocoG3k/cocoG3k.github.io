@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
-
-const { title = "Coco G3k", description = "" } = Astro.props;
+const { title = "cocoG学入門", description = "日記と、聴いた曲の記録。真髄はここに。", active = "diary", total } = Astro.props;
+// The homepage is an alternate entry point to the same article index.
+const canonicalPath = Astro.url.pathname === "/" ? "/diary" : Astro.url.pathname.replace(/\/$/, "");
+const canonical = new URL(canonicalPath || "/", Astro.site);
 ---
 <!doctype html>
 <html lang="ja">
@@ -10,14 +12,27 @@ const { title = "Coco G3k", description = "" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content="cocoG学入門" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
-    <slot />
+    <a class="skip-link" href="#main">本文へ移動</a>
+    <div class="page">
+      <header class="site-header">
+        <p class="site-name"><a href="/">cocoG学入門</a></p>
+        <p class="tagline">真髄はここに</p>
+      </header>
+      <nav class="site-nav" aria-label="メインナビゲーション">
+        <a href="/diary" aria-current={active === "diary" ? "page" : undefined}>記事一覧</a>
+        <a href="/about" aria-current={active === "about" ? "page" : undefined}>このブログについて</a>
+        <a href="https://github.com/cocoG3k">GitHub</a>
+      </nav>
+      <slot />
+      <footer class="site-footer"><span>© cocoG学入門</span>{total !== undefined && <span>全{total}記事</span>}</footer>
+    </div>
   </body>
 </html>

@@ -26,50 +26,19 @@ const prevEntry =
     ? diaryEntries[currentIndex + 1]
     : undefined;
 ---
-
-<BaseLayout title={`cocoG | ${entry.data.title}`} description={entry.data.description}>
-  <main>
-    <header>
-      <div class="brand">
-        <a href="/" aria-label="cocoG">
-          <img src="/cocog-logo.png" alt="cocoG" />
-        </a>
-      </div>
-      <nav>
-        <a href="/diary">記事一覧</a>
-      </nav>
+<BaseLayout title={`${entry.data.title} | cocoG学入門`} description={entry.data.description} active="article">
+  <main id="main" class="reading-layout">
+    <header class="article-header">
+      <div class="article-meta"><time class="date" datetime={entry.data.date.toISOString().slice(0, 10)}>{formatDate(entry.data.date)}</time><div class="tag-list">{(entry.data.tags ?? []).map((tag) => <a href={`/diary?tag=${encodeURIComponent(tag)}`}>{tag}</a>)}</div></div>
+      <h1>{entry.data.title}</h1><p class="description">{entry.data.description}</p>
     </header>
-
-    <section class="hero" style="padding-bottom: 32px;">
-      <div>
-        <span class="entry-date">{formatDate(entry.data.date)}</span>
-        <h1>{entry.data.title}</h1>
-        <p>{entry.data.description}</p>
-        <div class="entry-meta">
-          <div class="entry-meta-group">
-            <span class="entry-meta-label">Date</span>
-            <span>{formatDate(entry.data.date)}</span>
-          </div>
-          <div class="entry-meta-group">
-            <span class="entry-meta-label">Tags</span>
-            <div class="tag-list">
-              {(entry.data.tags ?? ["未設定"]).map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div class="hero-actions">
-          <a class="button" href="/diary">一覧へ戻る</a>
-        </div>
-      </div>
-    </section>
-
-    <article class="card prose" style="margin-top: 24px;">
-      <Content />
-    </article>
-    <section class="card" style="margin-top: 24px;">
-      <div class="giscus"></div>
+    <article class="prose"><Content /></article>
+    <nav class="article-nav" aria-label="記事の移動">
+      {prevEntry && <a href={`/diary/${prevEntry.slug}`}><span>← 前の記事</span>{prevEntry.data.title}</a>}
+      {nextEntry && <a class="newer" href={`/diary/${nextEntry.slug}`}><span>次の記事 →</span>{nextEntry.data.title}</a>}
+    </nav>
+    <p><a class="back-link" href="/diary">記事一覧へ戻る</a></p>
+    <section class="comments" aria-label="コメント"><h2>コメント</h2><div class="giscus"></div>
       <script
         src="https://giscus.app/client.js"
         is:inline
@@ -88,29 +57,5 @@ const prevEntry =
         async
       ></script>
     </section>
-
-    {(nextEntry || prevEntry) && (
-      <section class="nav-links" style="margin-top: 48px;">
-        {nextEntry && (
-          <a class="card nav-link" href={`/diary/${nextEntry.slug}`} style={{ marginLeft: 'auto' }}>
-            <span class="nav-label">次の記事</span>
-            <span class="nav-title">{nextEntry.data.title}</span>
-            <span class="nav-date">{formatDate(nextEntry.data.date)}</span>
-          </a>
-        )}
-        {prevEntry && (
-          <a class="card nav-link" href={`/diary/${prevEntry.slug}`} style={{ marginRight: 'auto' }}>
-            <span class="nav-label">前の記事</span>
-            <span class="nav-title">{prevEntry.data.title}</span>
-            <span class="nav-date">{formatDate(prevEntry.data.date)}</span>
-          </a>
-        )}
-      </section>
-    )}
-
-    <footer>
-      <span>© 2026 cocoG. Written with calm.</span>
-      <span>Tokyo / Home desk</span>
-    </footer>
   </main>
 </BaseLayout>

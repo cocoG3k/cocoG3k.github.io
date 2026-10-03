@@ -7,6 +7,7 @@ const diary = defineCollection({
     description: z.string(),
     date: z.date(),
     tags: z.array(z.string()).optional(),
+    category: z.string().optional(),
   }),
 });
 
